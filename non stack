@@ -1,0 +1,23 @@
+def solveMaze(maze, startX, startY):
+    found = False
+    maze[startX][startY] = 1
+    steps = 1
+    placeX = startX
+    placeY = startY
+    while maze[placeX][placeY] != 'G':
+        if maze[placeX][placeY - 1] == ' ': #North
+            steps += 1
+            maze[placeX][placeY - 1] = steps
+            placeY -= 1
+        if maze[placeX + 1][placeY] == ' ': #East
+            steps += 1
+            maze[placeX + 1][placeY] = steps
+            placeX += 1
+        if maze[placeX][placeY + 1] == ' ': #South
+            steps += 1
+            maze[placeX][placeY + 1] = steps
+            placeY += 1
+        if maze[placeX - 1][placeY] == ' ': #East
+            steps += 1
+            maze[placeX - 1][placeY] = steps
+            placeX -= 1
