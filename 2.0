@@ -1,0 +1,78 @@
+maze = [
+['+','+','+','+','+','+'],
+['+',' ','+',' ',' ','G'],
+['+',' ',' ',' ','+','+'],
+['+',' ','+','+',' ','+'],
+['+',' ',' ',' ',' ','+'],
+['+','+','+','+','+','+'] ]
+deadmaze = [
+['+','+','+','+','+','+'],
+['+',' ','+',' ',' ','G'],
+['+',' ',' ',' ','+','+'],
+['+','+','+','+',' ','+'],
+['+',' ',' ',' ',' ','+'],
+['+','+','+','+','+','+'] ]
+
+
+def solveMaze(maze, startX, startY):
+    found = False
+    maze[startX][startY] = 1
+    steps = 1
+    placeX = startX
+    placeY = startY
+    path = Stack()
+    path.push([placeX,placeY])
+    while found == False:
+        if maze[placeX - 1][placeY] == 'G': #Northisgoal
+            found = True
+            return found
+        elif maze[placeX - 1][placeY] == ' ': #North
+            steps += 1
+            maze[placeX - 1][placeY] = steps
+            placeX -= 1
+            place = [placeX,placeY]
+            path.push(place)
+        elif maze[placeX][placeY + 1] == 'G': #Eastisgoal
+            found = True
+            return found
+        elif maze[placeX][placeY + 1] == ' ': #East
+            steps += 1
+            maze[placeX][placeY + 1] = steps
+            placeY += 1
+            place = [placeX,placeY]
+            path.push(place)
+        elif maze[placeX + 1][placeY] == 'G': #Southisgoal
+            found = True
+            return found
+        elif maze[placeX + 1][placeY] == ' ': #South
+            steps += 1
+            maze[placeX + 1][placeY] = steps
+            placeX += 1
+            place = [placeX,placeY]
+            path.push(place)
+        elif maze[placeX][placeY - 1] == 'G': #Eastisgoal
+            found = True
+            return found
+        elif maze[placeX][placeY - 1] == ' ': #East
+            steps += 1
+            maze[placeX][placeY - 1] = steps
+            placeY -= 1
+            place = [placeX,placeY]
+            path.push(place)
+        else:
+            if path.isEmpty() == True:
+                return found
+            else:    
+                path.pop()
+                placeX = path.peek()[0]
+                placeY = path.peek()[1]
+                printMaze(maze)
+    return found
+
+
+
+
+
+if __name__ == '__main__':
+    print(solveMaze(maze, 3, 4))
+    print(solveMaze(deadmaze, 3, 4))
