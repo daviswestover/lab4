@@ -1,0 +1,64 @@
+class Book:
+    def __init__(self,title = '',author = '',year = None):
+        self.title = title
+        self.author = author
+        self.year = year
+
+    def getTitle(self):
+        return self.title
+
+    def getAuthor(self):
+        return self.author
+
+    def getYear(self):
+        return self.year
+
+    def getBookDetails(self):
+        details = "Title: {}, Author: {}, Year: {}".format(self.title,self.author,self.year)
+        return details
+
+    def __gt__(self, rhs):
+        ##Code saying if the title is lexicon before (or whatever criteria is return true etc
+        #AUthor alphabet, year, title alphabet
+        if self.author.upper() == rhs.author.upper():#orientation: Z is the biggest
+            if self.year == rhs.year:
+                compare = []
+                compare.append(self.title.split()[0])
+                compare.append(rhs.title.split()[0])
+                compare.sort()
+                if self.title.split()[0] == compare[0]: #If left value is first alphabetically, it is not larger
+                    return False
+                else:
+                    return True
+            else:
+                if self.year == None:
+                    return False
+                elif rhs.year == None:
+                    return True
+                elif self.year >= rhs.year: #if the number is larger, its more recent
+                    return True
+                else:
+                    return False
+        else:
+            if self.author == '':
+                return False
+            if rhs.author == '':
+                return True
+            if self.author.split()[0].upper() == rhs.author.split()[0].upper():
+                compare = []
+                compare.append(self.author.split()[1].upper())      #First Names
+                compare.append(rhs.author.split()[1].upper())
+                compare.sort()
+                if self.author.split()[1].upper() == compare[0]:
+                    return False
+                else:
+                    return True
+            else: 
+                compare = []
+                compare.append(self.author.split()[0])
+                compare.append(rhs.author.split()[0])
+                compare.sort()
+                if self.author.split()[0] == compare[0]: #If left value is first alphabetically, it is not larger
+                    return False
+                else:
+                    return True
